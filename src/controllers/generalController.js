@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
 const { bookingMsg } = require('../helpers/contactMsgs');
+const db = require('../database/models');
+const DOMAIN = require('../helpers/config');
 
 const generalController = {
     
@@ -139,6 +141,52 @@ const generalController = {
             }
         
         });
+      
+        
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({
+          meta:{
+            status:'error',
+          },
+          errorMsg: error.message,
+          error
+        })
+      }
+
+  },
+
+  webData : async (req, res) => {
+
+    try {
+        
+      const webInfo = await db.Info.findAll()
+      
+      if (webInfo.length===0){
+        throw new Error('No se cargó info de la página')
+      }
+      
+      const data = webInfo[0]
+      // console.log(data);
+      const info = {
+        ...data.dataValues,
+        welcomeMsg: data.welcomeMsg.replace(/\n/g, '<br/>'),
+        contactOwners: data.contactOwners.replace(/\n/g, '<br/>'),
+        contactExtra: data.contactExtra.replace(/\n/g, '<br/>'),
+        videoOne: data.videoOne ? `${DOMAIN}videos/${data.videoOne}` : null, 
+        videoTwo: data.videoTwo ? `${DOMAIN}videos/${data.videoTwo}` : null, 
+        videoThree: data.videoThree ? `${DOMAIN}videos/${data.videoThree}` : null, 
+      }
+              
+              res.status(200).json({
+                  meta:{
+                      status:'success'  
+                  },
+                  data: info,
+                  // info:webInfo[0]
+                  })
+              
+
       
         
       } catch (error) {

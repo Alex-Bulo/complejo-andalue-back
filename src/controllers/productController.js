@@ -104,7 +104,8 @@ const productController = {
             meta:{
 
                 status:'success',
-                products: info.length
+                products: info.length,
+                cabins: info.map(cabin => {return {name:cabin.name,id:cabin.id} })
             },
             data: info,
             // prodInfo

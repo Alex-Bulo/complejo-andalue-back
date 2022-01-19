@@ -8,6 +8,7 @@ const bookingsController = require('../controllers/bookingsController');
 
 bookingsRouter.get('/code/:code', bookingsController.getByCode );
 bookingsRouter.get('/user/:id', bookingsController.getByUser );
+bookingsRouter.get('/product/:id?', bookingsController.getByProduct );
 
 
 module.exports = bookingsRouter;

@@ -47,6 +47,35 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: false
         },
 
+        price: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNull: false
+        },
+
+        discount: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNull: false,
+            defaultValue: 0
+        },
+
+        firstPayment: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNull: false
+        },
+
+        firstPaymentDate: {
+            type: DataTypes.DATE,
+        },
+
+        secondPayment: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNull: false
+        },
+
+        secondPaymentDate: {
+            type: DataTypes.DATE,
+        },
+
         createdAt : DataTypes.DATE,
         updatedAt : DataTypes.DATE
 

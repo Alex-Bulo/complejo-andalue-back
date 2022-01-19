@@ -28,7 +28,10 @@ const usersController = {
                     {
                         model: db.Booking, as: 'bookings',
                         attributes: ['code','startDate', 'endDate'],
-                        include:[{model:db.Product, as:'product',attributes:['id','name'],required:true}]
+                        include:[
+                            {model:db.Product, as:'product',attributes:['id','name'],required:true},
+                            {model:db.Feedback, as:'feedback',attributes:['codeBooking','feedback']}
+                        ]
                     }
                 ]
             })
@@ -46,7 +49,7 @@ const usersController = {
                 })   
                 return
             }    
-
+            console.log(userInfo[0].bookings);
             const isCodeCorrect = isMailCorrect && userInfo[0].bookings.some(booking => booking.code === req.body.code) 
             
             if(!isCodeCorrect){
@@ -76,7 +79,8 @@ const usersController = {
                                 startDate: booking.startDate,
                                 endDate: booking.endDate,
                                 cabinId: booking.product.id,
-                                cabin: booking.product.name
+                                cabin: booking.product.name,
+                                feedback: booking.feedback.length === 0 ? false : true
                             }
                         })
                     }

@@ -33,8 +33,8 @@ const contactFormsValidations = {
         }
 
         if (name.length === 0){ req.errors.name = {status: true, msg:'Completar con nombre'} }
-        if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))){ req.errors.mail = {status: true, msg:'Completar con mail válido'} }
         if (info.length === 0){ req.errors.info = {status: true, msg:'Completar consulta'} }
+        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))){ req.errors.mail = {status: true, msg:'Completar con mail válido'} }
 
 
         next();

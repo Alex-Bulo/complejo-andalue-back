@@ -9,6 +9,7 @@ const generalController = require('../controllers/generalController');
 const contactFormsValidations = require('../middlewares/contactFormsValidations');
 const bookingsRouter = require('./bookingsRouter');
 const questionsRouter = require('./questionsRouter');
+const adminRouter = require('./adminRouter');
 // const testController = require('../../controllers/testController')
 
 
@@ -23,9 +24,10 @@ apiRouter.use('/users', usersRouter );
 apiRouter.use('/bookings', bookingsRouter );
 
 apiRouter.use('/questions', questionsRouter );
-
+apiRouter.use('/admin', adminRouter );
 
 apiRouter.post('/bookingMail',contactFormsValidations.bookingMail, generalController.bookingMail)
 apiRouter.post('/contactUs', contactFormsValidations.contactUs, generalController.contactUs)
+apiRouter.get('/webInfo', generalController.webData)
 
 module.exports = apiRouter;

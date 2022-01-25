@@ -30,19 +30,6 @@ module.exports = (sequelize, DataTypes) => {
             unique:true
         },
 
-        password: {
-            type: DataTypes.STRING(100),
-            allowNull: false
-        },
-
-        photo: {
-            type: DataTypes.STRING(50),
-            allowNull: false,
-            defaultValue: 'default.png'
-        },
-
-       
-
         access: {
             type: DataTypes.BOOLEAN,
             defaultValue: true

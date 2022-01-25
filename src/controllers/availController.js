@@ -177,7 +177,11 @@ const availController = {
                         bookingsNumber: bookings.length,
                         bookingsDays: bookings.reduce( (ac,el) => ac + el.days, 0),
                     },
-                    bookings
+                    bookings,
+                    nextAvail: {
+                        startDate: getProxAvail(cabin.bookings,undefined,undefined).startDate,
+                        endDate: getProxAvail(cabin.bookings,undefined,undefined).endDate
+                    }
                 }
 
             )    

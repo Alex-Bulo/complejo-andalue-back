@@ -188,6 +188,7 @@ const bookingsController = {
             const needForProduct = req.params.id ? {id: { [Op.eq]: req.params.id }} : {}
   
             const bookingInfo = await db.Booking.findAll({
+                order:[['startDate','DESC']],
                 include:[
                     {
                         model: db.User, as: 'user', required: true,
@@ -202,7 +203,7 @@ const bookingsController = {
                     {
                         model:db.Product, as:'product', 
                         where: needForProduct, required: true,
-                        attributes:['id', 'name'],
+                        attributes:['id', 'name','color'],
                         include:[ {model: db.Image, as: 'mainImage', required: true, attributes: ['name']}]    
                     }
                 ]
@@ -225,6 +226,7 @@ const bookingsController = {
                         source: booking.source.name,
                         cabinID: booking.product.id,
                         cabin: booking.product.name,
+                        color: booking.product.color,
                         cabinImage: `${DOMAIN}images/${booking.product.mainImage.name}`,
                         userID: booking.user.id,
                         userName: booking.user.name,
@@ -237,17 +239,79 @@ const bookingsController = {
                     }
                 })
                     
-            
+                const cabinsArray = [] 
+                info.forEach(b => {
+                    if(!cabinsArray.some(c => c.cabinID === b.cabinID)){
+                        const cabin = {
+                            cabinID: b.cabinID, cabin: b.cabin,
+                            color: b.color, cabinImage: b.cabinImage
+                        }
+                        cabinsArray.push(cabin)
+                    }
+
+                    })
             
             res.status(200).json({
             meta:{
 
                 status: 'success',
                 total: info.length,
-                cabins: [...new Set(info.map(b => b.cabinID))].length
+                totalCabins: [...new Set(info.map(b => b.cabinID))].length,
+                cabins: cabinsArray
             },
             data: info,
             // userInfo
+            })
+
+  
+        } catch (error) {
+          console.log(error);
+          res.status(500).json({
+            meta:{
+              status:'error',
+            },
+            errorMsg: error.message,
+            error
+          })
+        }
+            
+    },
+
+    getInfo : async (req, res) => {
+        
+        try {
+  
+            const userInfo = await db.User.findAll({
+                attributes: ['id', 'email', 'access']
+            })
+            
+            const sourceInfo = await db.Source.findAll({
+                attributes: ['id', 'name']
+            })
+
+            const productInfo = await db.Product.findAll({
+                attributes: ['id', 'name']
+            })
+
+            const info = {
+                cabins: [...productInfo],
+                sources: [...sourceInfo],
+                users: [...userInfo]
+            }
+            
+            
+            res.status(200).json({
+            meta:{
+
+                status: 'success',
+                total: {
+                    cabins: info.cabins.length,
+                    sources: info.sources.length,
+                    users: info.users.length
+                }
+            },
+            data: info,
+            // bookingInfo
             })
 
   

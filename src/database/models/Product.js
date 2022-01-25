@@ -35,6 +35,12 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: false
         },
 
+        color:{
+            type: DataTypes.STRING(7),
+            allowNull: false,
+            unique: true,
+        },
+
         mainidImage: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false

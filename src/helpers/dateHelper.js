@@ -72,7 +72,7 @@ const isDate = (dateToCheck) => {
     return moment(dateToCheck).isValid()
 }
 
-const getProxAvail = (bookings, from,to) =>{
+const getProxAvail = (bookings, from, to) =>{
     const startDate = moment(from)
 
     const duration = getNumberOfDays(from,to)

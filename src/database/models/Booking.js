@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        
+               
         idSource: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false

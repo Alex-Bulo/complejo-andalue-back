@@ -1,6 +1,7 @@
 const DOMAIN = require('../helpers/config')
 const { Op } = require('sequelize');
 const db = require('../database/models');
+const { getProxAvail } = require('../helpers/dateHelper');
 
 
 const productController = {
@@ -11,7 +12,7 @@ const productController = {
             const needForProduct = product ? {id: { [Op.eq]: product }} : {}
   
             const prodInfo = await db.Product.findAll({
-                attributes:['id', 'name', 'adults', 'kids', 'pets'],
+                attributes:['id', 'name', 'adults', 'kids', 'pets','color'],
                 where: needForProduct,
                 include:[
 
@@ -76,6 +77,7 @@ const productController = {
                         adults: cabin.adults,
                         kids: cabin.kids,
                         pets: cabin.pets,
+                        color: cabin.color,
                         mainImage: `${DOMAIN}images/${cabin.mainImage.name}`,
                         category: cabin.category.name,
                         images: cabinImagesAll.map( image => `${DOMAIN}images/${image}`),
@@ -92,7 +94,11 @@ const productController = {
                                 }
                             )
                         }),
-                        bookings: cabin.bookings
+                        bookings: cabin.bookings,
+                        nextAvail: {
+                            startDate: getProxAvail(cabin.bookings,undefined,undefined).startDate,
+                            endDate: getProxAvail(cabin.bookings,undefined,undefined).endDate
+                        }
                     }
 
                 )    

@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
             unique: true,
         },
 
-        mainidImage: {
+        mainIdImage: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },

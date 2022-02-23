@@ -1,6 +1,8 @@
 const express = require('express');
 const bookingsRouter = express.Router();
 const bookingsController = require('../controllers/bookingsController');
+const bookingValidation = require('../middlewares/bookingValidation');
+const formsValidations = require('../middlewares/formsMiddleware');
 // const testController = require('../../controllers/testController')
 
 
@@ -11,6 +13,10 @@ bookingsRouter.get('/user/:id', bookingsController.getByUser );
 bookingsRouter.get('/product/:id?', bookingsController.getByProduct );
 
 bookingsRouter.get('/neededInfo', bookingsController.getInfo );
+
+bookingsRouter.post('/new', formsValidations, bookingValidation, bookingsController.newBooking );
+bookingsRouter.post('/edit', formsValidations, bookingValidation, bookingsController.newBooking );
+// bookingsRouter.put('/edit', bookingsController.getByProduct );
 
 
 

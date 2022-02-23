@@ -1,6 +1,7 @@
 const DOMAIN = require('../helpers/config')
 const { Op } = require('sequelize');
 const db = require('../database/models');
+const { validationResult } = require('express-validator')
 
 
 const bookingsController = {
@@ -282,7 +283,8 @@ const bookingsController = {
         try {
   
             const userInfo = await db.User.findAll({
-                attributes: ['id', 'email', 'access']
+                attributes: ['id', ['email','name'], 'access'],
+                // where:{access: true}
             })
             
             const sourceInfo = await db.Source.findAll({
@@ -328,6 +330,108 @@ const bookingsController = {
             
     },
   
+    newBooking : async (req, res) => {
+        // console.log('controller INPUTS:', req.inputs);
+        console.log('controller BODY:', req.body);
+        
+        const formValidation = validationResult(req)
+        //validErrors devuelve meta.status:'error', data:[inputs]
+        if (!formValidation.isEmpty()){
+            const errors = formValidation.mapped()
+
+            const newInputs = req.inputs.map(input => {
+                let newInput = input
+                
+                if(errors[input.name]){
+                    newInput = {
+                        ...input,
+                        error:true,
+                        errorMsg:errors[input.name].msg
+                    }
+                }
+                return newInput  
+            })
+
+            res.status(400).json({
+                meta:{
+                    status:'error',
+                  },
+                  data: newInputs
+            })
+            return
+        }
+        try {
+            //ok devuelve status:'success', data: {name,mail,code}
+            let userInfo
+
+            if(req.body.user !== ''){
+
+                const userFound = await db.User.findOne({
+                    where: {email: {[Op.eq]:req.body.user}}
+                })
+                userInfo = userFound
+            }else{
+                userInfo = await db.User.create({
+                        name: req.body.userName,
+                        lastName: req.body.userLastName,
+                        phoneNumber: req.body.userPhone,
+                        email: req.body.userEmail
+                    })
+            }
+
+            const cabinFound = await db.Product.findOne({
+                where: {name:{ [Op.eq]: req.body.cabinID }}
+            })
+            
+            const sourceFound = await db.Source.findOne({
+                where: {name: {[Op.eq]:req.body.source}}
+            })
+            const code = req.body.startDate.slice(-2) + cabinFound.id + '-' + req.body.startDate.slice(-5,-3) + userInfo.id + '-' + req.body.startDate.slice(2,4) + (req.body.adults + req.body.kids) 
+            
+            const info = {
+                code,
+                idProduct: cabinFound.id,
+                idUser: userInfo.id,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate,
+                adults: req.body.adults,
+                kids:req.body.kids,
+                pets:req.body.pets,
+                idSource: sourceFound.id,
+                cancelled:false,
+                price: req.body.price,
+                discount: req.body.discount,
+                firstPayment: req.body.firstPayment,
+                firstPaymentDate:req.body.firstPaymentDate,
+                secondPayment: req.body.secondPayment,
+                secondPaymentDate: req.body.secondPaymentDate,
+            }
+
+            console.log('NEW BOOKING',info);
+            const newBooking = await db.Booking.create(info)
+            
+            
+            res.status(200).json({
+            meta:{
+                status: 'success',
+            },
+            data: {name:userInfo.name, mail:userInfo.email, code:newBooking.code},
+            // userInfo
+            })
+
+  
+        } catch (error) {
+          console.log(error);
+          res.status(500).json({
+            meta:{
+              status:'error',
+            },
+            errorMsg: error.message,
+            error
+          })
+        }
+            
+    },
 
   }
 

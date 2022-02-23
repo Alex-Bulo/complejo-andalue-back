@@ -8,6 +8,19 @@ const getNumberOfDays = (from, to) => {
     return moment.duration(endDate.diff(startDate)).asDays()
 }
 
+const getNextDay = (from = moment()) => {
+    const nextDay = from.add(1,'day')
+
+    return nextDay.format('YYYY-MM-DD')
+}
+
+const getPrevDay = (from = moment()) => {
+    const prevDay = from.subtract(1,'day')
+
+    return prevDay.format('YYYY-MM-DD')
+}
+
+
 const getLastMonth = ( from = moment() ) => {
     const lastMonth = from.subtract(1,'month')
     
@@ -59,7 +72,6 @@ const getAllMonth = (month, accountDate=false) => {
     return getAllDays(from,to)
     
 }
-
 
 const isAfter = (from, to) =>{
     const startDate = moment(from)
@@ -124,7 +136,7 @@ const isBooked = (bookings, from, to) => {
 
 module.exports = {
     getNumberOfDays, 
-    getLastMonth, getNextMonth, getLastFortnight, getNextFortnight, 
+    getNextDay, getPrevDay, getLastMonth, getNextMonth, getLastFortnight, getNextFortnight, 
     isAfter, isDate, isBooked,
     getProxAvail
 }

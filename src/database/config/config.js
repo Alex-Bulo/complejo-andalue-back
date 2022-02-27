@@ -1,5 +1,3 @@
-const db = process.env.DATABASE_URL
-
 module.exports = {
   "development": {
     "username": db.USERNAME,
@@ -17,11 +15,11 @@ module.exports = {
     "dialect": "mysql"
   },
   "production": {
-    "username": db.USERNAME,
-    "password": db.PASSWORD,
-    "database": db.DATABASE,
-    "host": db.HOSTNAME,
-    "port":db.PORT,
+    "username": process.env.DBUSERNAME,
+    "password": process.env.DBPASSWORD,
+    "database": process.env.DBDATABASE,
+    "host": process.env.DBHOSTNAME,
+    "port":process.env.DBPORT,
     "dialect": "mysql"
   }
 }

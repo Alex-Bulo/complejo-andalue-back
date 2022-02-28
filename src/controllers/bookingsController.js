@@ -51,7 +51,7 @@ const bookingsController = {
                         source: booking.source.name,
                         cabinID: booking.product.id,
                         cabin: booking.product.name,
-                        cabinImage: `${DOMAIN}images/${booking.product.mainImage.name}`,
+                        cabinImage: `${DOMAIN}api/images/${booking.product.mainImage.name}`,
                         userID: booking.user.id,
                         userName: booking.user.name,
                         userLastName: booking.user.lastName,
@@ -147,7 +147,7 @@ const bookingsController = {
                                 source: booking.source.name,
                                 cabinID: booking.product.id,
                                 cabin: booking.product.name,
-                                cabinImage: `${DOMAIN}images/${booking.product.mainImage.name}`,
+                                cabinImage: `${DOMAIN}api/images/${booking.product.mainImage.name}`,
                                 ratings: [], // traer ratings puestos por el admin en cada booking ~booking.ratings.map
                                 feedback: [] // traer feedbacks puestos por el user en cada booking ~booking.feedbacks.map
                             }
@@ -228,7 +228,7 @@ const bookingsController = {
                         cabinID: booking.product.id,
                         cabin: booking.product.name,
                         color: booking.product.color,
-                        cabinImage: `${DOMAIN}images/${booking.product.mainImage.name}`,
+                        cabinImage: `${DOMAIN}api/images/${booking.product.mainImage.name}`,
                         userID: booking.user.id,
                         userName: booking.user.name,
                         userLastName: booking.user.lastName,

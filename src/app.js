@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(cors())
 
 //routes
+app.use('/', getRouter);
 app.use('/api', getRouter);
 
 

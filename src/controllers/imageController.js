@@ -112,6 +112,7 @@ const imageController = {
               return {
                 imageID: image.id,
                 name: `${DOMAIN}images/${image.name}`,
+                // name: `https://andalue-space.nyc3.digitaloceanspaces.com/images/${image.name}`,
                 cabins : image.products,
                 categories: image.categories.map(category => category.name),
                 features: image.features,

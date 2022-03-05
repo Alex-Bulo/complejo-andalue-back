@@ -1,4 +1,4 @@
-const DOMAIN = require('../helpers/config')
+const {RES_URL} = require('../helpers/config')
 const { Op } = require('sequelize');
 const db = require('../database/models');
 

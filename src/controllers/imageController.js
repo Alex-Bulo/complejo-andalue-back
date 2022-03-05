@@ -1,4 +1,4 @@
-const DOMAIN = require('../helpers/config')
+const {RES_URL} = require('../helpers/config')
 const { Op } = require('sequelize');
 const db = require('../database/models');
 
@@ -38,8 +38,7 @@ const imageController = {
             const info = imageInfo.map( image => {
               return {
                 imageID: image.id,
-                name: `${DOMAIN}images/${image.name}`,
-                // name: `https://andalue-space.nyc3.digitaloceanspaces.com/images/${image.name}`,
+                name: `${RES_URL}images/${image.name}`,
                 cabins : image.products,
                 categories: image.categories.map(category => category.name),
                 features: image.features,
@@ -51,7 +50,7 @@ const imageController = {
             // const info = {
             //   productID : product,
             //   cabin: imageInfoByProduct.map(product => product.name),
-            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}images/${image.name}`)).flat(),    
+            //   images: imageInfoByProduct.map(product => product.images.map (image => `${RES_URL}images/${image.name}`)).flat(),    
             //   detail: [...detail]
             // }
 
@@ -111,8 +110,7 @@ const imageController = {
             const info = imageInfo.map( image => {
               return {
                 imageID: image.id,
-                // name: `${DOMAIN}images/${image.name}`,
-                name: `https://andalue-space.nyc3.digitaloceanspaces.com/images/${image.name}`,
+                name: `${RES_URL}images/${image.name}`,
                 cabins : image.products,
                 categories: image.categories.map(category => category.name),
                 features: image.features,
@@ -124,7 +122,7 @@ const imageController = {
             // const info = {
             //   productID : product,
             //   cabin: imageInfoByProduct.map(product => product.name),
-            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}images/${image.name}`)).flat(),    
+            //   images: imageInfoByProduct.map(product => product.images.map (image => `${RES_URL}images/${image.name}`)).flat(),    
             //   detail: [...detail]
             // }
 
@@ -188,7 +186,7 @@ const imageController = {
             const info = imageInfo.map( image => {
               return {
                 imageID: image.id,
-                name: `${DOMAIN}images/${image.name}`,
+                name: `${RES_URL}images/${image.name}`,
                 cabins : image.products,
                 categories: image.categories.map(category => category.name),
                 features: image.features,
@@ -200,7 +198,7 @@ const imageController = {
             // const info = {
             //   productID : product,
             //   cabin: imageInfoByProduct.map(product => product.name),
-            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}images/${image.name}`)).flat(),    
+            //   images: imageInfoByProduct.map(product => product.images.map (image => `${RES_URL}images/${image.name}`)).flat(),    
             //   detail: [...detail]
             // }
 
@@ -258,7 +256,7 @@ const imageController = {
               return detail = {
                 productID: product.id,
                 name: product.name,
-                mainImage : `${DOMAIN}images/${product.mainImage.name}`
+                mainImage : `${RES_URL}images/${product.mainImage.name}`
               }
             })
   
@@ -320,7 +318,7 @@ const imageController = {
                 
                   return {
                     imageID: image.id,
-                    name: `${DOMAIN}api/images/${image.name}`,
+                    name: `${RES_URL}api/images/${image.name}`,
                     cabins : image.products,
                     categories: image.categories.map(category => category.name),
                     features: image.features,

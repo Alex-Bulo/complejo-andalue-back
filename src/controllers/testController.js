@@ -1,4 +1,4 @@
-const DOMAIN = require('../helpers/config')
+const {RES_URL} = require('../helpers/config')
 const { Op } = require('sequelize');
 const db = require('../database/models');
 
@@ -81,7 +81,7 @@ const testController = {
           const info ={
             categoryID: category,
             category: categoryInfo.name,
-            images: imageInfoByCatAndFeature.map( feature => `${DOMAIN}images/${feature.images.name}`),
+            images: imageInfoByCatAndFeature.map( feature => `${RES_URL}images/${feature.images.name}`),
             
             detail : imageInfoByCatAndFeature.map( feature => {
               
@@ -89,7 +89,7 @@ const testController = {
                 name: feature.features.title,
                 description: feature.features.description,
                 icon: feature.features.icon.icon,
-                image: `${DOMAIN}images/${feature.images.name}`
+                image: `${RES_URL}images/${feature.images.name}`
               } 
               
               return detail

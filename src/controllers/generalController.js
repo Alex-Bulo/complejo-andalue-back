@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const { bookingMsg } = require('../helpers/contactMsgs');
 const db = require('../database/models');
-const DOMAIN = require('../helpers/config');
+const {RES_URL} = require('../helpers/config');
 
 const generalController = {
     
@@ -175,9 +175,9 @@ const generalController = {
         welcomeMsg: data.welcomeMsg.replace(/\n/g, '<br/>'),
         contactOwners: data.contactOwners.replace(/\n/g, '<br/>'),
         contactExtra: data.contactExtra.replace(/\n/g, '<br/>'),
-        videoOne: data.videoOne ? `${DOMAIN}videos/${data.videoOne}` : null, 
-        videoTwo: data.videoTwo ? `${DOMAIN}videos/${data.videoTwo}` : null, 
-        videoThree: data.videoThree ? `${DOMAIN}videos/${data.videoThree}` : null, 
+        videoOne: data.videoOne ? `${RES_URL}videos/${data.videoOne}` : null, 
+        videoTwo: data.videoTwo ? `${RES_URL}videos/${data.videoTwo}` : null, 
+        videoThree: data.videoThree ? `${RES_URL}videos/${data.videoThree}` : null, 
       }
               
               res.status(200).json({

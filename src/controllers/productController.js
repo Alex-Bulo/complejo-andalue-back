@@ -1,4 +1,4 @@
-const DOMAIN = require('../helpers/config')
+const {RES_URL} = require('../helpers/config')
 const { Op } = require('sequelize');
 const db = require('../database/models');
 const { getProxAvail } = require('../helpers/dateHelper');
@@ -78,9 +78,9 @@ const productController = {
                         kids: cabin.kids,
                         pets: cabin.pets,
                         color: cabin.color,
-                        mainImage: `${DOMAIN}images/${cabin.mainImage.name}`,
+                        mainImage: `${RES_URL}images/${cabin.mainImage.name}`,
                         category: cabin.category.name,
-                        images: cabinImagesAll.map( image => `${DOMAIN}images/${image}`),
+                        images: cabinImagesAll.map( image => `${RES_URL}images/${image}`),
                         features: cabin.features.map( feature => {
                             const imagePerFeature = feature.images.filter(image => featureImages.indexOf(image.name) !== -1)
 
@@ -90,7 +90,7 @@ const productController = {
                                     description: feature.description,
                                     subcategory: feature.subcategory,
                                     icon: feature.icon.icon,
-                                    images: imagePerFeature.map(image => `${DOMAIN}images/${image.name}`)
+                                    images: imagePerFeature.map(image => `${RES_URL}images/${image.name}`)
                                 }
                             )
                         }),

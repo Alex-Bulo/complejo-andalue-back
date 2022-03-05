@@ -1,6 +1,6 @@
 const db = require('../database/models');
 const { Op } = require('sequelize');
-const DOMAIN = require('../helpers/config');
+const {RES_URL} = require('../helpers/config');
 
 const adminController = {
 

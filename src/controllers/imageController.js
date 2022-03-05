@@ -38,7 +38,7 @@ const imageController = {
             const info = imageInfo.map( image => {
               return {
                 imageID: image.id,
-                name: `${DOMAIN}api/images/${image.name}`,
+                name: `${DOMAIN}images/${image.name}`,
                 cabins : image.products,
                 categories: image.categories.map(category => category.name),
                 features: image.features,
@@ -50,7 +50,7 @@ const imageController = {
             // const info = {
             //   productID : product,
             //   cabin: imageInfoByProduct.map(product => product.name),
-            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}api/images/${image.name}`)).flat(),    
+            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}images/${image.name}`)).flat(),    
             //   detail: [...detail]
             // }
 
@@ -110,7 +110,7 @@ const imageController = {
             const info = imageInfo.map( image => {
               return {
                 imageID: image.id,
-                name: `${DOMAIN}api/images/${image.name}`,
+                name: `${DOMAIN}images/${image.name}`,
                 cabins : image.products,
                 categories: image.categories.map(category => category.name),
                 features: image.features,
@@ -122,7 +122,7 @@ const imageController = {
             // const info = {
             //   productID : product,
             //   cabin: imageInfoByProduct.map(product => product.name),
-            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}api/images/${image.name}`)).flat(),    
+            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}images/${image.name}`)).flat(),    
             //   detail: [...detail]
             // }
 
@@ -186,7 +186,7 @@ const imageController = {
             const info = imageInfo.map( image => {
               return {
                 imageID: image.id,
-                name: `${DOMAIN}api/images/${image.name}`,
+                name: `${DOMAIN}images/${image.name}`,
                 cabins : image.products,
                 categories: image.categories.map(category => category.name),
                 features: image.features,
@@ -198,7 +198,7 @@ const imageController = {
             // const info = {
             //   productID : product,
             //   cabin: imageInfoByProduct.map(product => product.name),
-            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}api/images/${image.name}`)).flat(),    
+            //   images: imageInfoByProduct.map(product => product.images.map (image => `${DOMAIN}images/${image.name}`)).flat(),    
             //   detail: [...detail]
             // }
 
@@ -256,7 +256,7 @@ const imageController = {
               return detail = {
                 productID: product.id,
                 name: product.name,
-                mainImage : `${DOMAIN}api/images/${product.mainImage.name}`
+                mainImage : `${DOMAIN}images/${product.mainImage.name}`
               }
             })
   

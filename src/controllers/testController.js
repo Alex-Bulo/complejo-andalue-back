@@ -81,7 +81,7 @@ const testController = {
           const info ={
             categoryID: category,
             category: categoryInfo.name,
-            images: imageInfoByCatAndFeature.map( feature => `${DOMAIN}api/images/${feature.images.name}`),
+            images: imageInfoByCatAndFeature.map( feature => `${DOMAIN}images/${feature.images.name}`),
             
             detail : imageInfoByCatAndFeature.map( feature => {
               
@@ -89,7 +89,7 @@ const testController = {
                 name: feature.features.title,
                 description: feature.features.description,
                 icon: feature.features.icon.icon,
-                image: `${DOMAIN}api/images/${feature.images.name}`
+                image: `${DOMAIN}images/${feature.images.name}`
               } 
               
               return detail

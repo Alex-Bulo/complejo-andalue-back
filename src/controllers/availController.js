@@ -54,7 +54,7 @@ const availController = {
                 return {
                     cabinID: cabin.id,
                     cabin: cabin.name,
-                    cabinImage: `${DOMAIN}api/images/${cabin.mainImage.name}`,
+                    cabinImage: `${DOMAIN}images/${cabin.mainImage.name}`,
                     startDate: start,
                     endDate: end,
                     status: cabin.defaultClose ? !isBooked([{startDate:cabin.closeSince}]) : !isBooked(cabin.bookings,start,end),
@@ -69,7 +69,7 @@ const availController = {
             return{
                 cabinID: cabin.id,
                 cabin: cabin.name,
-                cabinImage: `${DOMAIN}api/images/${cabin.mainImage.name}`,
+                cabinImage: `${DOMAIN}images/${cabin.mainImage.name}`,
                 startDate: getProxAvail(cabin.bookings,start,end).startDate,
                 endDate: getProxAvail(cabin.bookings,start,end).endDate,
                 status: true
@@ -172,7 +172,7 @@ const availController = {
                     adults: cabin.adults,
                     kids: cabin.kids,
                     pets: cabin.pets,
-                    mainImage: `${DOMAIN}api/images/${cabin.mainImage.name}`,
+                    mainImage: `${DOMAIN}images/${cabin.mainImage.name}`,
                     bookingsInfo: {
                         bookingsNumber: bookings.length,
                         bookingsDays: bookings.reduce( (ac,el) => ac + el.days, 0),

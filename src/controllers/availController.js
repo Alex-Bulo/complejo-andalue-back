@@ -41,7 +41,7 @@ const availController = {
                     },
 
                     {
-                        model: db.Booking, as: 'bookings',
+                        model: db.Booking, as: 'bookings', required: false,
                         attributes: ['code', 'startDate', 'endDate'],
                         where: [{cancelled: false}, {start_date: { [Op.gte]: getLastMonth(moment(start)) }},{start_date: { [Op.lte]: getNextMonth(moment(end)) }}]
                     }
@@ -130,7 +130,7 @@ const availController = {
                     },
 
                     {
-                        model: db.Booking, as: 'bookings',
+                        model: db.Booking, as: 'bookings', required: false,
                         attributes: ['code', 'startDate', 'endDate'],
                         where: [{cancelled: false}, needForTime],
                         include:[

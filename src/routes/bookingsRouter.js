@@ -15,7 +15,7 @@ bookingsRouter.get('/product/:id?', bookingsController.getByProduct );
 bookingsRouter.get('/neededInfo', bookingsController.getInfo );
 
 bookingsRouter.post('/new', formsValidations, bookingValidation, bookingsController.newBooking );
-bookingsRouter.post('/edit', formsValidations, bookingValidation, bookingsController.newBooking );
+bookingsRouter.put('/edit', formsValidations, bookingValidation, bookingsController.editBooking );
 // bookingsRouter.put('/edit', bookingsController.getByProduct );
 
 

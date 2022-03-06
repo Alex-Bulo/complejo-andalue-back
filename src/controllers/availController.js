@@ -7,7 +7,6 @@ const {getNumberOfDays, getLastMonth, getNextMonth, isBooked, getProxAvail} = re
 const availController = {
 
     getAvailForForm : async (req, res) => {       
-                
         try {
             if(Object.keys(req.errors).length > 0){                
             
@@ -22,13 +21,11 @@ const availController = {
                 return
             }
             
-            
             const start = req.query.startDate
             const end = req.query.endDate
             const adults = Number(req.query.adults)
             const kids = req.query.kids ? Number(req.query.kids) : 0
             // const pets = req.query.pets ? Number(req.query.pets) : 0
-
 
             const prodInfo = await db.Product.findAll({
                 attributes:['id', 'name', 'adults', 'kids', 'pets', 'defaultClose', 'closeSince'],
@@ -48,6 +45,9 @@ const availController = {
 
                 ]
             })
+
+
+
 
             const main = prodInfo.map(cabin =>{
                 // console.log(cabin.name);

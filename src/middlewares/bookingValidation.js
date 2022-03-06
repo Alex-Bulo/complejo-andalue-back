@@ -109,22 +109,21 @@ const bookingValidation = [
     body('userEmail')
     .custom( async (value,{req})=>{
         const {user, userEmail} = req.body
-
-        if (userEmail === ''){
-            if(user===''){
+        if(user==''){
+            if (userEmail === ''){
                 throw new Error('Ingresar mail del huésped.')
-            }
-        }else{
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail))){ 
-                throw new Error('Ingresar con mail válido')
-            }
-
-            const userFound = await db.User.findOne({
-                where: {email: {[Op.eq]:userEmail}}
-            })
-
-            if (userFound){
-                throw new Error('Huésped ya registrado.')
+            }else{
+                if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail))){ 
+                    throw new Error('Ingresar con mail válido')
+                }
+    
+                const userFound = await db.User.findOne({
+                    where: {email: {[Op.eq]:userEmail}}
+                })
+    
+                if (userFound){
+                    throw new Error('Huésped ya registrado.')
+                }
             }
         }
             return true
@@ -144,7 +143,7 @@ const bookingValidation = [
     .isDate()
     .withMessage('Ingresar fecha de egreso válida.')
     .custom( async (value,{req})=>{
-        const {startDate, endDate,cabinID} = req.body
+        const {code, startDate, endDate, cabinID} = req.body
         
         if(!isAfter(startDate,endDate)){
             throw new Error('Fecha de egreso no puede ser anterior a la de ingreso.')
@@ -159,7 +158,7 @@ const bookingValidation = [
             ]
         })
 
-        if(isBooked(bookings,startDate,endDate)){
+        if(code === '' && isBooked(bookings,startDate,endDate)){
             throw new Error('Ya existe una reserva para esas fechas.')
         }
 

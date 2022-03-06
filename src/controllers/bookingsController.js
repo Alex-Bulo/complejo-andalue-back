@@ -332,7 +332,7 @@ const bookingsController = {
   
     newBooking : async (req, res) => {
         // console.log('controller INPUTS:', req.inputs);
-        console.log('controller BODY:', req.body);
+        // console.log('controller BODY:', req.body);
         
         const formValidation = validationResult(req)
         //validErrors devuelve meta.status:'error', data:[inputs]

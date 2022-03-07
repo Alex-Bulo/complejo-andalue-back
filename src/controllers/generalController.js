@@ -31,7 +31,7 @@ const generalController = {
                           )
   
       const mail = {
-        to: 'serverandalue@outlook.com', // Change to your recipient
+        to: 'sitioandalue@zohomail.com', // Change to your recipient
         from: 'sitioandalue@zohomail.com', // Change to your verified sender
         subject: 'Consulta Reserva',
         text: msg.text,
@@ -87,7 +87,7 @@ const generalController = {
           Consulta: ${req.body.info} <br>       `
 
       const mail = {
-          to: 'serverandalue@outlook.com', // Change to your recipient
+          to: 'sitioandalue@zohomail.com', // Change to your recipient
           from: 'sitioandalue@zohomail.com', // Change to your verified sender
           subject: 'Consulta desde Página Contacto',
           text: html,
